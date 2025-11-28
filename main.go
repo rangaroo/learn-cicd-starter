@@ -88,12 +88,11 @@ func main() {
 
 	v1Router.Get("/healthz", handlerReadiness)
 
-	
 	const defaultReadHeaderTimeout = 10 * time.Second
 	router.Mount("/v1", v1Router)
 	srv := &http.Server{
-		Addr:    ":" + port,
-		Handler: router,
+		Addr:              ":" + port,
+		Handler:           router,
 		ReadHeaderTimeout: defaultReadHeaderTimeout,
 	}
 
