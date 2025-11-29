@@ -6,7 +6,7 @@ on:
 
 jobs:
   set_up:
-    name: Set up CD
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
