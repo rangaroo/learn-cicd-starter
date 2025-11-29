@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"testing"
 	"net/http"
 	"strings"
+	"testing"
 )
 
 func TestGetAPIKey(t *testing.T) {
@@ -16,7 +16,7 @@ func TestGetAPIKey(t *testing.T) {
 	}{
 		{
 			name: "valid API key",
-			headers: http. Header{
+			headers: http.Header{
 				"Authorization": []string{"ApiKey my-secret-api-key"},
 			},
 			expectedKey:   "my-secret-api-key",
@@ -24,7 +24,7 @@ func TestGetAPIKey(t *testing.T) {
 		},
 		{
 			name: "valid API key with special characters",
-			headers: http. Header{
+			headers: http.Header{
 				"Authorization": []string{"ApiKey abc123-xyz_789.token"},
 			},
 			expectedKey:   "abc123-xyz_789.token",
@@ -70,7 +70,7 @@ func TestGetAPIKey(t *testing.T) {
 		},
 		{
 			name: "API key with extra spaces",
-			headers: http. Header{
+			headers: http.Header{
 				"Authorization": []string{"ApiKey  my-key-with-spaces"},
 			},
 			expectedKey:   "",
@@ -102,8 +102,8 @@ func TestGetAPIKey(t *testing.T) {
 				}
 			} else if tt.errorContains != "" {
 				if gotErr == nil {
-					t. Errorf("GetAPIKey() expected error containing %q, got nil", tt. errorContains)
-				} else if ! strings.Contains(gotErr.Error(), tt.errorContains) {
+					t.Errorf("GetAPIKey() expected error containing %q, got nil", tt.errorContains)
+				} else if !strings.Contains(gotErr.Error(), tt.errorContains) {
 					t.Errorf("GetAPIKey() error = %q, should contain %q", gotErr.Error(), tt.errorContains)
 				}
 			} else {
@@ -151,7 +151,7 @@ func TestGetAPIKey_CaseInsensitiveHeader(t *testing.T) {
 			gotKey, gotErr := GetAPIKey(headers)
 
 			if gotErr != nil {
-				t. Errorf("GetAPIKey() unexpected error = %v", gotErr)
+				t.Errorf("GetAPIKey() unexpected error = %v", gotErr)
 			}
 
 			if gotKey != tt.expectedKey {
